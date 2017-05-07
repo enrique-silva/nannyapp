@@ -1,9 +1,5 @@
 <h1>Nanny App</h1>
 
-{% for user in context %}
-<div>
-    <p>published: {{ user.first_name }}</p>
-</div>
-{% endfor %}
+<h1>{{ context }}</h1>
 
-
+<p>published: {{ context.first_name }}</p>
