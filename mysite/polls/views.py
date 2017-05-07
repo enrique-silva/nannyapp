@@ -6,8 +6,9 @@ from .models import User
 # Create your views here.
 
 def index(request):
-    latest_question_list = User.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
+    users = User.objects.all()
+    context = {'name': users}
+    print(context)
     return render(request, 'polls/index.html', context)
 #
 # def detail(request, question_id):
