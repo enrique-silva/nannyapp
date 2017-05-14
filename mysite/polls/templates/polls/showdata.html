@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {background-color: powderblue;}
+        h1   {color: blue;}
+        p    {color: red;}
+    </style>
+{% if all_users %}
+
+<h1>Here is the list of users.</h1>
+<ul>
+    {% for user in all_users %}
+
+    <li> Name:{{ user.user_name }}  First Name:{{ user.first_name  }} Last Name:{{ user.last_name  }} Password:{{ user.password }}</li>
+    {% endfor %}
+</ul>
+{#  In case  no user exists.  #}
+{% else %}
+<h3> No users found.</h3>
+{% endif %}
+
+</head>
+</html>
