@@ -6,7 +6,9 @@
         h1   {color: blue;}
         p    {color: red;}
     </style>
-Welcome User
+    {% if request.user.is_authenticated %}
+    Welcome {{ request.user.first_name }}. Thanks for logging in.
+    {% else %}<a href="{% url django.contrib.auth.login %}">Login</a>{% endif %}
 
 <p>Manage Employers</p>
 <P>Time and Expenses</P>

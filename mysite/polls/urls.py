@@ -15,21 +15,22 @@ urlpatterns = [
     # # ex: /polls/5/vote/
     # url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 
-    #/localhost:8000/login to login the user
-    url(r'^login/$', views.login, name='signup'),
+    # /localhost:8000/login to login the user
+    url(r'^login/$', views.login_view, name='login'),
+
+    # /localhost:8000/logout to logout the user
+    url(r'^logout/$', views.logout_view, name='logout'),
+
+    # /localhost:8000/logout to logout the user
+    url(r'^register/$', views.register_view, name='register'),
     #
-    #/localhost:8000/signup to sign the user in
+    # /localhost:8000/signup to sign the user in
     url(r'^signup/$', views.signup, name='signup'),
 
-    #/localhost:8000/home_page_user where a user can manager their profile
+    # /localhost:8000/home_page_user where a user can manager their profile
     url(r'^home_page_user/$', views.home_page_user, name='shomepage_page_user'),
 
-    #/users/showdata:url to display the list of users stored on the database
+    # /users/showdata:url to display the list of users stored on the database
     url(r'^showdata/$', views.showdata, name='showdata'),
 
 ]
-
-
-
-
-
