@@ -19,7 +19,7 @@ class User(models.Model):
     def __str__(self):
         return self.first_name
 
-class Company(models.Model):
+class Employer(models.Model):
     #primary key will be auto generated
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=30)
@@ -31,7 +31,7 @@ class Company(models.Model):
 
 class Shift(models.Model):
     #primary key will be auto generated
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Employer, on_delete=models.CASCADE)
     shift_date = models.DateTimeField()
     #clock_out = models.DateTimeField()
     total_hours = models.FloatField()
@@ -41,7 +41,7 @@ class Shift(models.Model):
 
 class Expenses(models.Model):
     #primary key will be auto generated
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(Employer, on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
     cost = models.FloatField()
     expense_date = models.DateTimeField()

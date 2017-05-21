@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from django.shortcuts import render, redirect
-from polls.models import User
+from polls.models import User, Employer
 from django.contrib.auth import authenticate,get_user_model,login,logout
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm
 
 
 # homepage
@@ -46,6 +46,23 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/home_page")
+
+def employer_add_view(request):
+
+    title = "Add Employer"
+
+    form = EmployerAddForm(request.POST)
+    if form.is_valid():
+        company_name = form.cleaned_data.get('company_name','')
+        pay_rate = form.cleaned_data.get('pay_rate','')
+        email = form.cleaned_data.get('email','')
+        #return something at some point
+        employer_obj = Employer(company_name=company_name, pay_rate=pay_rate, email_address=email)
+        employer_obj.save()
+        return redirect("/showdata")
+    else:
+        form = EmployerAddForm()
+        return render(request, 'polls/form.html',{"form":form,"title":title})
 
 
 

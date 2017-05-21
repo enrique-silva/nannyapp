@@ -57,3 +57,12 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("This email has already been registered")
 
         return email
+
+class EmployerAddForm(forms.ModelForm):
+
+    # to take the input of username
+    company_name = forms.CharField()
+    # to take the input of password and the widget will hide the text
+    pay_rate = forms.CharField()
+
+    email = forms.EmailField(label='Email address')
