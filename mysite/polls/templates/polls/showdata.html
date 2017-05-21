@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html>
 <head>
     <style>
@@ -7,7 +9,16 @@
         p    {color: red;}
     </style>
 {% if all_users %}
-
+<div id="nav">
+    <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="http://localhost:8000/login">Login</a></li>
+        <li><a href="http://localhost:8000/logout">Logout</a></li>
+        <li><a href="http://localhost:8000/register">Sign Up</a></li>
+        <li><a href="http://localhost:8000/employer_add">add employer</a></li>
+        <li><a href="http://localhost:8000/showdata">show data</a></li>
+    </ul>
+</div>
 <h1>Here is the list of users.</h1>
 <ul>
     {% for user in all_users %}
