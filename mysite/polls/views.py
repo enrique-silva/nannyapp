@@ -3,31 +3,29 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from django.shortcuts import render, redirect
-from polls.models import User, Employer
-from django.contrib.auth import authenticate,get_user_model,login,logout
-from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm
+from .models import User, Employer, Expense
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm, ExpenseAddForm
 
 
 # homepage
 def home_page(request):
     return render(request, 'polls/home_page.html')
 
-def login_view(request):
 
+def login_view(request):
     title = "Login"
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
-        user = authenticate(username=username,password=password)
+        user = authenticate(username=username, password=password)
         login(request, user)
         return redirect("/home_page_user")
-    return render(request, 'polls/form.html', {"form":form,"title":title})
-
+    return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
 def register_view(request):
-
     title = "Register"
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
@@ -36,69 +34,78 @@ def register_view(request):
         user.set_password(password)
         user.save()
 
-        new_user = authenticate(username=user.username,password=password)
+        new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        #return something at some point
+        # return something at some point
         return redirect("/home_page_user")
 
-    return render(request, 'polls/form.html',{"form":form,"title":title})
+    return render(request, 'polls/form.html', {"form": form, "title": title})
+
 
 def logout_view(request):
     logout(request)
     return redirect("/home_page")
 
-def employer_add_view(request):
 
+def expense_add(request):
+    title = "Add Eexpense"
+
+    form = ExpenseAddForm(request.POST)
+    if form.is_valid():
+        pay_rate = form.cleaned_data.get('pay_rate', '')
+        additional_cost = form.cleaned_data.get('additional_cost', '')
+        shift_date = form.cleaned_data.get('shift_date', '')
+        total_hours = form.cleaned_data.get('total_hours', '')
+        description = form.cleaned_data.get('description', '')
+
+        # return something at some point
+        expense_obj = Expense(pay_rate=pay_rate,
+                              additional_cost=additional_cost, shift_date=shift_date,
+                              total_hours=total_hours,description=description,)
+        expense_obj.save()
+        return redirect("/showdata")
+    else:
+        form = ExpenseAddForm()
+        return render(request, 'polls/form.html', {"form": form, "title": title})
+
+def employer_add_view(request):
     title = "Add Employer"
 
     form = EmployerAddForm(request.POST)
     if form.is_valid():
-        company_name = form.cleaned_data.get('company_name','')
-        pay_rate = form.cleaned_data.get('pay_rate','')
-        email = form.cleaned_data.get('email','')
-        #return something at some point
-        employer_obj = Employer(company_name=company_name, pay_rate=pay_rate, email_address=email)
+        company_name = form.cleaned_data.get('company_name', '')
+        email = form.cleaned_data.get('email', '')
+        # return something at some point
+        employer_obj = Employer(company_name=company_name, email_address=email)
         employer_obj.save()
         return redirect("/showdata")
     else:
         form = EmployerAddForm()
-        return render(request, 'polls/form.html',{"form":form,"title":title})
+        return render(request, 'polls/form.html', {"form": form, "title": title})
 
-
-
-
-
-
-
-
-
-
-
-
-
-#the function executes with the signup url to take the inputs
-def signup(request):
-    if request.method == 'POST':  # if the form has been filled
-
-        form = UserForm(request.POST)
-
-        if form.is_valid():  # All the data is valid
-            user_name = request.POST.get('user_name', '')
-            password = request.POST.get('password', '')
-            first_name = request.POST.get('first_name', '')
-            last_name = request.POST.get('last_name', '')
-        # creating an user object containing all the data
-        user_obj = User(user_name=user_name, password=password, first_name=first_name, last_name=last_name)
-        # saving all the data in the current object into the database
-        user_obj.save()
-
-        return HttpResponseRedirect('/home_page_user')
-        # render(request, 'polls/signup.html') # Redirect after POST
-    # {'user_obj': user_obj,'is_registered':True }
-    else:
-        form = UserForm()  # an unboundform
-
-        return render(request, 'polls/signup.html', {'form': form})
+# the function executes with the signup url to take the inputs
+# def signup(request):
+#     if request.method == 'POST':  # if the form has been filled
+#
+#         form = UserForm(request.POST)
+#
+#         if form.is_valid():  # All the data is valid
+#             user_name = request.POST.get('user_name', '')
+#             password = request.POST.get('password', '')
+#             first_name = request.POST.get('first_name', '')
+#             last_name = request.POST.get('last_name', '')
+#         # creating an user object containing all the data
+#         user_obj = User(user_name=user_name, password=password, first_name=first_name, last_name=last_name)
+#         # saving all the data in the current object into the database
+#         user_obj.save()
+#
+#         return HttpResponseRedirect('/home_page_user')
+#         # render(request, 'polls/signup.html') # Redirect after POST
+#     # {'user_obj': user_obj,'is_registered':True }
+#     else:
+#         form = UserForm()  # an unboundform
+#
+#         return render(request, 'polls/signup.html', {'form': form})
 
 
 def home_page_user(request):
@@ -109,5 +116,6 @@ def home_page_user(request):
 def showdata(request):
     all_users = User.objects.all()
     employer = Employer.objects.all()
-    return render(request, 'polls/showdata.html', {'all_users': all_users,'employer':employer})
-
+    expense = Expense.objects.all()
+    return render(request, 'polls/showdata.html', {'all_users': all_users, 'employer': employer,
+                                                   'expense': expense})

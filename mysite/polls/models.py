@@ -22,29 +22,21 @@ class User(models.Model):
 class Employer(models.Model):
     #primary key will be auto generated
     company_name = models.CharField(max_length=30)
-    pay_rate = models.FloatField()
     email_address = models.EmailField()
 
     def __str__(self):
         return self.company_name
 
-class Shift(models.Model):
+class Expense(models.Model):
     #primary key will be auto generated
     company = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    shift_date = models.DateTimeField()
-    #clock_out = models.DateTimeField()
+    pay_rate = models.FloatField()
+    additional_cost = models.FloatField()
+    shift_date = models.DateField()
     total_hours = models.FloatField()
+    description = models.CharField(max_length=200)
 
     def __str__(self):
         return self.total_hours
 
-class Expenses(models.Model):
-    #primary key will be auto generated
-    company = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    description = models.CharField(max_length=200)
-    cost = models.FloatField()
-    expense_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.description
 

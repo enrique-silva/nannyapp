@@ -24,11 +24,14 @@ urlpatterns = [
     # /localhost:8000/logout to logout the user
     url(r'^register/$', views.register_view, name='register'),
     #
-    # /localhost:8000/signup to sign the user in
-    url(r'^signup/$', views.signup, name='signup'),
+    # # /localhost:8000/signup to sign the user in
+    # url(r'^signup/$', views.signup, name='signup'),
 
     # /localhost:8000/signup to sign the user in
     url(r'^employer_add/$', views.employer_add_view, name='employer_add'),
+
+    # /localhost:8000/signup to sign the user in
+    url(r'^expense_add/$', views.expense_add, name='expense_add'),
 
     # /localhost:8000/home_page_user where a user can manager their profile
     url(r'^home_page/$', views.home_page, name='homepage_page'),

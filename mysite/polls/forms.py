@@ -1,4 +1,5 @@
 from django import forms
+from .models import Employer
 from django.contrib.auth import authenticate, get_user_model, login, logout
 
 User = get_user_model()
@@ -60,9 +61,25 @@ class UserRegisterForm(forms.ModelForm):
 
 class EmployerAddForm(forms.Form):
 
-    # to take the input of username
+    # to take the input of company name
     company_name = forms.CharField()
-    # to take the input of password and the widget will hide the text
-    pay_rate = forms.CharField()
-
+    # to take the input of the company email
     email = forms.EmailField(label='Email address')
+
+class ExpenseAddForm(forms.Form):
+
+    company = forms.ModelChoiceField(queryset=Employer.objects.all())
+
+    # to take the input of shift date
+    shift_date = forms.DateField()
+    # the pay/rate for the shift /hr
+    pay_rate = forms.FloatField(required=False)
+    #total hours
+    total_hours = forms.FloatField(required=False)
+    # any adidtional costs outside of the rate
+    additional_cost = forms.FloatField(required=False)
+    #notes or desciptions
+    description = forms.CharField(max_length=200, required=False)
+
+
+

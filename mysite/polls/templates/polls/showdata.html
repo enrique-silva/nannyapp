@@ -1,54 +1,77 @@
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <style>
-        body {background-color: powderblue;}
-        h1   {color: blue;}
-        p    {color: red;}
+        body {
+            background-color: powderblue;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        p {
+            color: red;
+        }
     </style>
-{% if all_users %}
-<div id="nav">
+    {% if all_users %}
+    <div id="nav">
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="http://localhost:8000/login">Login</a></li>
+            <li><a href="http://localhost:8000/logout">Logout</a></li>
+            <li><a href="http://localhost:8000/register">Sign Up</a></li>
+            <li><a href="http://localhost:8000/employer_add">add employer</a></li>
+            <li><a href="http://localhost:8000/showdata">show data</a></li>
+        </ul>
+    </div>
+    <h1>Here is the list of users.</h1>
     <ul>
-        <li><a href="/">home</a></li>
-        <li><a href="http://localhost:8000/login">Login</a></li>
-        <li><a href="http://localhost:8000/logout">Logout</a></li>
-        <li><a href="http://localhost:8000/register">Sign Up</a></li>
-        <li><a href="http://localhost:8000/employer_add">add employer</a></li>
-        <li><a href="http://localhost:8000/showdata">show data</a></li>
+        {% for user in all_users %}
+
+        <li> Name:{{ user.user_name }} First Name:{{ user.first_name }} Last Name:{{ user.last_name }} Password:{{
+            user.password }}
+        </li>
+        {% endfor %}
+
     </ul>
-</div>
-<h1>Here is the list of users.</h1>
-<ul>
-    {% for user in all_users %}
-
-    <li> Name:{{ user.user_name }}  First Name:{{ user.first_name  }} Last Name:{{ user.last_name  }} Password:{{ user.password }}</li>
-    {% endfor %}
-
-</ul>
-{#  In case  no user exists.  #}
-{% else %}
-<h3> No users found.</h3>
-{% endif %}
+    {# In case no user exists. #}
+    {% else %}
+    <h3> No users found.</h3>
+    {% endif %}
     <br>
- {% if employer %}
+    {% if employer %}
 
-<h1>Here is the list of employers.</h1>
-<ul>
-    {% for user in employer %}
+    <h1>Here is the list of employers.</h1>
+    <ul>
+        {% for user in employer %}
 
-    <li> Name:{{ user.company_name }}  pay rate:{{ user.pay_rate  }} email address:{{ user.email_address  }} </li>
-    {% endfor %}
+        <li> Name:{{ user.company_name }} email address:{{ user.email_address }}</li>
+        {% endfor %}
 
-</ul>
-{#  In case  no user exists.  #}
-{% else %}
-<h3> No empployer found.</h3>
-{% endif %}
+    </ul>
+    {# In case no employer exists. #}
+    {% else %}
+    <h3> No employer found.</h3>
+    {% endif %}
+    <br>
+    {% if expense %}
 
+    <h1>Here is the list of expenses.</h1>
+    <ul>
+        {% for user in expense %}
 
+        <li> Name:{{ user.company }} pay rate:{{ user.pay_rate }}
+        additional cost:{{ user.additional_cost }} shift date:{{ user.shift_date }}
+        total hours:{{ user.total_hours }} description:{{ user.description }}</li>
+        {% endfor %}
 
+    </ul>
+    {# In case no expense exists. #}
+    {% else %}
+    <h3> No expenses found.</h3>
+    {% endif %}
 
 
 </head>
