@@ -58,7 +58,7 @@ class UserRegisterForm(forms.ModelForm):
 
         return email
 
-class EmployerAddForm(forms.ModelForm):
+class EmployerAddForm(forms.Form):
 
     # to take the input of username
     company_name = forms.CharField()

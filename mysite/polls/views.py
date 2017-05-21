@@ -108,5 +108,6 @@ def home_page_user(request):
 
 def showdata(request):
     all_users = User.objects.all()
-    return render(request, 'polls/showdata.html', {'all_users': all_users,})
+    employer = Employer.objects.all()
+    return render(request, 'polls/showdata.html', {'all_users': all_users,'employer':employer})
 

@@ -14,11 +14,31 @@
 
     <li> Name:{{ user.user_name }}  First Name:{{ user.first_name  }} Last Name:{{ user.last_name  }} Password:{{ user.password }}</li>
     {% endfor %}
+
 </ul>
 {#  In case  no user exists.  #}
 {% else %}
 <h3> No users found.</h3>
 {% endif %}
+    <br>
+ {% if employer %}
+
+<h1>Here is the list of employers.</h1>
+<ul>
+    {% for user in employer %}
+
+    <li> Name:{{ user.company_name }}  pay rate:{{ user.pay_rate  }} email address:{{ user.email_address  }} </li>
+    {% endfor %}
+
+</ul>
+{#  In case  no user exists.  #}
+{% else %}
+<h3> No empployer found.</h3>
+{% endif %}
+
+
+
+
 
 </head>
 </html>

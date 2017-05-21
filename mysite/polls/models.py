@@ -21,7 +21,6 @@ class User(models.Model):
 
 class Employer(models.Model):
     #primary key will be auto generated
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=30)
     pay_rate = models.FloatField()
     email_address = models.EmailField()
