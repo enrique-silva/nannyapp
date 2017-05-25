@@ -68,7 +68,7 @@ class EmployerAddForm(forms.Form):
 
 class ExpenseAddForm(forms.Form):
 
-    company = forms.ModelChoiceField(queryset=Employer.objects.all())
+    company_name = forms.ModelChoiceField(queryset=Employer.objects.all())
 
     # to take the input of shift date
     shift_date = forms.DateField()
