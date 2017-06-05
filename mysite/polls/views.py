@@ -53,11 +53,11 @@ def expense_add(request):
     form = ExpenseAddForm(request.POST)
     print('TEST')
     if form.is_valid():
-        company = form.cleaned_data.get('company_name','')
+        company = form.cleaned_data.get('company', '')
         # company_name_not_primary = form.cleaned_data.get('company_name','')
         # b = Employer.objects.get(company_name=company_name_not_primary)
         # company_name = b.id
-        print('TEST',company)
+        # print('TEST',company)
         pay_rate = form.cleaned_data.get('pay_rate', '')
         additional_cost = form.cleaned_data.get('additional_cost', '')
         shift_date = form.cleaned_data.get('shift_date', '')
@@ -67,12 +67,13 @@ def expense_add(request):
         # return something at some point
         expense_obj = Expense(company=company, pay_rate=pay_rate,
                               additional_cost=additional_cost, shift_date=shift_date,
-                              total_hours=total_hours,description=description,)
+                              total_hours=total_hours, description=description, )
         expense_obj.save()
         return redirect("/showdata")
     else:
         form = ExpenseAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
+
 
 def employer_add_view(request):
     title = "Add Employer"
@@ -88,6 +89,7 @@ def employer_add_view(request):
     else:
         form = EmployerAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
+
 
 # the function executes with the signup url to take the inputs
 # def signup(request):

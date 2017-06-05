@@ -1,6 +1,7 @@
 from django import forms
-from .models import Employer
+from .models import Employer, Expense
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.admin.widgets import AdminDateWidget
 
 User = get_user_model()
 
@@ -59,27 +60,25 @@ class UserRegisterForm(forms.ModelForm):
 
         return email
 
-class EmployerAddForm(forms.Form):
 
+class EmployerAddForm(forms.Form):
     # to take the input of company name
     company_name = forms.CharField()
     # to take the input of the company email
     email = forms.EmailField(label='Email address')
 
-class ExpenseAddForm(forms.Form):
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
-    company_name = forms.ModelChoiceField(queryset=Employer.objects.all())
+class ExpenseAddForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['company', 'shift_date']
+        widgets = {
+            'shift_date': DateInput(),
+        }
 
-    # to take the input of shift date
-    shift_date = forms.DateField()
-    # the pay/rate for the shift /hr
-    pay_rate = forms.FloatField(required=False)
-    #total hours
-    total_hours = forms.FloatField(required=False)
-    # any adidtional costs outside of the rate
-    additional_cost = forms.FloatField(required=False)
-    #notes or desciptions
-    description = forms.CharField(max_length=200, required=False)
-
-
-
+    pay_rate = forms.FloatField()
+    total_hours = forms.FloatField()
+    additional_cost = forms.FloatField()
+    description = forms.CharField()
