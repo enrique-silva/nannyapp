@@ -1,0 +1,13 @@
+
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for expense in filter.qs %}
+    <li>{{ expense.company }} - {{ expense.shift_date }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

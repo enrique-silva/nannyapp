@@ -33,6 +33,9 @@ urlpatterns = [
     # /localhost:8000/signup to sign the user in
     url(r'^expense_add/$', views.expense_add, name='expense_add'),
 
+    # /localhost:8000/invoice to sign the user in
+    url(r'^invoice/$', views.invoice_add_view, name='invoice_add'),
+
     # /localhost:8000/home_page_user where a user can manager their profile
     url(r'^home_page/$', views.home_page, name='homepage_page'),
 

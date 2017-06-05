@@ -1,5 +1,5 @@
 from django import forms
-from .models import Employer, Expense
+from .models import Employer, Expense, Invoice
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.admin.widgets import AdminDateWidget
 
@@ -67,8 +67,10 @@ class EmployerAddForm(forms.Form):
     # to take the input of the company email
     email = forms.EmailField(label='Email address')
 
+
 class DateInput(forms.DateInput):
     input_type = 'date'
+
 
 class ExpenseAddForm(forms.ModelForm):
     class Meta:
@@ -82,3 +84,15 @@ class ExpenseAddForm(forms.ModelForm):
     total_hours = forms.FloatField()
     additional_cost = forms.FloatField()
     description = forms.CharField()
+
+
+class InvoiceAddForm(forms.ModelForm):
+    # to take the input of company name
+
+    class Meta:
+        model = Invoice
+        fields = ['c_name','start_date', 'end_date']
+        widgets = {
+            'start_date': DateInput(),
+            'end_date': DateInput(),
+        }

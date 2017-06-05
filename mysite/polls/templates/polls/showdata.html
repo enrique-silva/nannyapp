@@ -63,8 +63,9 @@
         {% for user in expense %}
 
         <li> Name:{{ user.company }} pay rate:{{ user.pay_rate }}
-        additional cost:{{ user.additional_cost }} shift date:{{ user.shift_date }}
-        total hours:{{ user.total_hours }} description:{{ user.description }}</li>
+            additional cost:{{ user.additional_cost }} shift date:{{ user.shift_date }}
+            total hours:{{ user.total_hours }} description:{{ user.description }}
+        </li>
         {% endfor %}
 
     </ul>
@@ -72,6 +73,25 @@
     {% else %}
     <h3> No expenses found.</h3>
     {% endif %}
+
+
+
+    {% if invoice %}
+
+    <h1>Here is the list of invoices.</h1>
+    <ul>
+        {% for inv in invoice %}
+
+        <li> Name:{{ inv.c_name }} start:{{ inv.start_date }}end:{{ inv.end_date }}
+        </li>
+        {% endfor %}
+
+    </ul>
+    {# In case no invoices exists. #}
+    {% else %}
+    <h3> No invoices found.</h3>
+    {% endif %}
+
 
 
 </head>

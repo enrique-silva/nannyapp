@@ -40,3 +40,10 @@ class Expense(models.Model):
 
     def __str__(self):
         return self.total_hours
+
+
+class Invoice(models.Model):
+    c_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+

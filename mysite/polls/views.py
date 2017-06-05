@@ -3,9 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
 from django.shortcuts import render, redirect
-from .models import User, Employer, Expense
+from .models import User, Employer, Expense, Invoice
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm, ExpenseAddForm
+from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm, ExpenseAddForm, InvoiceAddForm
+from .filters import ExpenseFilter
+
 
 
 # homepage
@@ -75,6 +77,30 @@ def expense_add(request):
         return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
+def invoice_add_view(request):
+    expense_list = Expense.objects.all()
+    expense_filter = ExpenseFilter(request.GET, queryset=expense_list)
+    return render(request, 'polls/expense_list.html', {'filter': expense_filter})
+
+
+    #title = "Add invoice"
+
+    # form = InvoiceAddForm(request.POST)
+    #
+    # if form.is_valid():
+    #     c_name = form.cleaned_data.get('c_name')
+    #     start_date = form.cleaned_data.get('start_date', '')
+    #     end_date = form.cleaned_data.get('end_date', '')
+    #     # return something at some point
+    #     invoice_obj = Invoice(c_name=c_name, start_date=start_date, end_date=end_date)
+    #
+    #     return redirect("/showdata")
+    # else:
+    #     form = InvoiceAddForm()
+    #     return render(request, 'polls/form.html', {"form": form, "title": title})
+
+
+
 def employer_add_view(request):
     title = "Add Employer"
 
@@ -89,6 +115,9 @@ def employer_add_view(request):
     else:
         form = EmployerAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
+
+
+
 
 
 # the function executes with the signup url to take the inputs
@@ -125,5 +154,6 @@ def showdata(request):
     all_users = User.objects.all()
     employer = Employer.objects.all()
     expense = Expense.objects.all()
+    invoice = Invoice.objects.all()
     return render(request, 'polls/showdata.html', {'all_users': all_users, 'employer': employer,
-                                                   'expense': expense})
+                                                   'expense': expense, 'invoice':invoice})
