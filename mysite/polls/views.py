@@ -10,6 +10,7 @@ from .filters import ExpenseFilter
 from django.contrib.auth.decorators import login_required
 
 
+
 # homepage
 def home_page(request):
     return render(request, 'polls/home_page.html')
@@ -49,7 +50,7 @@ def logout_view(request):
     return redirect("/home_page")
 
 
-@login_required(login_url='polls/home_page.html')
+@login_required(login_url=None)
 def expense_add(request):
     title = "Add Expense"
 
@@ -77,7 +78,7 @@ def expense_add(request):
         return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
-@login_required(login_url='polls/home_page.html')
+@login_required(login_url=None)
 def invoice_add_view(request):
     expense_list = Expense.objects.all()
     expense_filter = ExpenseFilter(request.GET, queryset=expense_list)
@@ -101,7 +102,7 @@ def invoice_add_view(request):
     #     return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
-@login_required(login_url='polls/home_page.html')
+@login_required(login_url=None)
 def employer_add_view(request):
     title = "Add Employer"
 
