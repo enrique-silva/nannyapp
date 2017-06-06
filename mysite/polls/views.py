@@ -10,7 +10,6 @@ from .filters import ExpenseFilter
 from django.contrib.auth.decorators import login_required
 
 
-
 # homepage
 def home_page(request):
     return render(request, 'polls/home_page.html')
@@ -49,12 +48,12 @@ def logout_view(request):
     logout(request)
     return redirect("/home_page")
 
+
 @login_required
 def expense_add(request):
     title = "Add Expense"
 
     form = ExpenseAddForm(request.POST)
-    print('TEST')
     if form.is_valid():
         company = form.cleaned_data.get('company', '')
         # company_name_not_primary = form.cleaned_data.get('company_name','')
@@ -77,6 +76,7 @@ def expense_add(request):
         form = ExpenseAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
 
+
 @login_required
 def invoice_add_view(request):
     expense_list = Expense.objects.all()
@@ -84,7 +84,7 @@ def invoice_add_view(request):
     return render(request, 'polls/expense_list.html', {'filter': expense_filter})
 
 
-    #title = "Add invoice"
+    # title = "Add invoice"
 
     # form = InvoiceAddForm(request.POST)
     #
@@ -116,9 +116,6 @@ def employer_add_view(request):
     else:
         form = EmployerAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
-
-
-
 
 
 # the function executes with the signup url to take the inputs
@@ -157,4 +154,4 @@ def showdata(request):
     expense = Expense.objects.all()
     invoice = Invoice.objects.all()
     return render(request, 'polls/showdata.html', {'all_users': all_users, 'employer': employer,
-                                                   'expense': expense, 'invoice':invoice})
+                                                   'expense': expense, 'invoice': invoice})
