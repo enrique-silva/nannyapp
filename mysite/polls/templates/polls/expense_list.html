@@ -1,13 +1,21 @@
 {% extends "polls/base.html" %}
-
+{% load mathfilters %}
 {% block content %}
-  <form method="get">
+<form method="get">
     {{ filter.form.as_p }}
     <button type="submit">Search</button>
-  </form>
-  <ul>
-  {% for expense in filter.qs %}
+</form>
+<ul>
+    {% for expense in filter.qs %}
+
     <li>{{ expense.company }} - {{ expense.shift_date }}</li>
-  {% endfor %}
-  </ul>
+    <li>Total Hours worked: {{ expense.total_hours }} - Pay Rate: {{ expense.pay_rate }}</li>
+    <li>Additional Expenses: {{ expense.additional_cost }}{{ expense.description }}</li>
+    <li>Description: {{ expense.description }}</li>
+    <li>Total Expenses: ${{ expense.pay_rate|mul:expense.total_hours|addition:expense.additional_cost}}</li>
+    ----------------------------------------------------------
+    {% endfor %}
+</ul>
 {% endblock %}
+
+
