@@ -24,7 +24,7 @@
 
     <h3>{{ expense.company }} - {{ expense.shift_date }}</h3>
     <h3>Total Hours worked: {{ expense.total_hours }} - Pay Rate: {{ expense.pay_rate }}</h3>
-    <h3>Additional Expenses: {{ expense.additional_cost }}{{ expense.description }}</h3>
+    <h3>Additional Expenses: {{ expense.additional_cost }}</h3>
     <h3>Description: {{ expense.description }}</h3>
     <h3>Total Expenses: ${{ expense.pay_rate|mul:expense.total_hours|addition:expense.additional_cost}}</h3>
     ----------------------------------------------------------
