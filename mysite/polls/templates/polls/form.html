@@ -1,16 +1,30 @@
-{% extends "polls/base.html" %}
+<!DOCTYPE html>
+{% load static %}
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/forms.css' %}" />
+<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
+<div id="mySidenav" class="sidenav">
+  <a href="http://localhost:8000/employer_add" id="about">Manage Employers</a>
+  <a href="http://localhost:8000/expense_add" id="blog">Time and Expenses</a>
+  <a href="http://localhost:8000/invoice" id="projects">Get Paid</a>
+  <a href="http://localhost:8000/logout" id="contact">Logout</a>
+</div>
 
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-    <h1>{{Title}}</h1>
+
+    <h1>{{title}}</h1>
+
 
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" class="btn btn=default" value="Submit">
+        <input type="submit" class="btn btn=default" value="Submit" align="center">
     </form>
+
+
 
 </div>
 

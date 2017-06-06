@@ -62,6 +62,7 @@ class UserRegisterForm(forms.ModelForm):
 
 
 class EmployerAddForm(forms.Form):
+    Title = 'Add an Employer'
     # to take the input of company name
     company_name = forms.CharField()
     # to take the input of the company email

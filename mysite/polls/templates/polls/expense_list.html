@@ -1,4 +1,18 @@
-{% extends "polls/base.html" %}
+
+
+<!DOCTYPE html>
+{% load static %}
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/forms.css' %}" />
+<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<div id="mySidenav" class="sidenav">
+  <a href="http://localhost:8000/employer_add" id="about">Manage Employers</a>
+  <a href="http://localhost:8000/expense_add" id="blog">Time and Expenses</a>
+  <a href="http://localhost:8000/invoice" id="projects">Get Paid</a>
+  <a href="http://localhost:8000/logout" id="contact">Logout</a>
+</div>
+
 {% load mathfilters %}
 {% block content %}
 <form method="get">
@@ -8,14 +22,15 @@
 <ul>
     {% for expense in filter.qs %}
 
-    <li>{{ expense.company }} - {{ expense.shift_date }}</li>
-    <li>Total Hours worked: {{ expense.total_hours }} - Pay Rate: {{ expense.pay_rate }}</li>
-    <li>Additional Expenses: {{ expense.additional_cost }}{{ expense.description }}</li>
-    <li>Description: {{ expense.description }}</li>
-    <li>Total Expenses: ${{ expense.pay_rate|mul:expense.total_hours|addition:expense.additional_cost}}</li>
+    <h3>{{ expense.company }} - {{ expense.shift_date }}</h3>
+    <h3>Total Hours worked: {{ expense.total_hours }} - Pay Rate: {{ expense.pay_rate }}</h3>
+    <h3>Additional Expenses: {{ expense.additional_cost }}{{ expense.description }}</h3>
+    <h3>Description: {{ expense.description }}</h3>
+    <h3>Total Expenses: ${{ expense.pay_rate|mul:expense.total_hours|addition:expense.additional_cost}}</h3>
     ----------------------------------------------------------
     {% endfor %}
 </ul>
 {% endblock %}
+
 
 

@@ -112,7 +112,7 @@ def employer_add_view(request):
         # return something at some point
         employer_obj = Employer(company_name=company_name, email_address=email)
         employer_obj.save()
-        return redirect("/showdata")
+        return redirect("/home_page_user")
     else:
         form = EmployerAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
