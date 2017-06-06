@@ -5,7 +5,7 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from .models import User, Employer, Expense, Invoice
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm, ExpenseAddForm, InvoiceAddForm
+from .forms import UserLoginForm, UserRegisterForm, EmployerAddForm, ExpenseAddForm
 from .filters import ExpenseFilter
 from django.contrib.auth.decorators import login_required
 
@@ -49,7 +49,7 @@ def logout_view(request):
     return redirect("/home_page")
 
 
-@login_required
+@login_required(login_url='polls/home_page.html')
 def expense_add(request):
     title = "Add Expense"
 
@@ -77,7 +77,7 @@ def expense_add(request):
         return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
-@login_required
+@login_required(login_url='polls/home_page.html')
 def invoice_add_view(request):
     expense_list = Expense.objects.all()
     expense_filter = ExpenseFilter(request.GET, queryset=expense_list)
@@ -101,7 +101,7 @@ def invoice_add_view(request):
     #     return render(request, 'polls/form.html', {"form": form, "title": title})
 
 
-@login_required
+@login_required(login_url='polls/home_page.html')
 def employer_add_view(request):
     title = "Add Employer"
 
