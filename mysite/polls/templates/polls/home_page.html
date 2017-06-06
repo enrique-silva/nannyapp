@@ -1,25 +1,20 @@
--<!DOCTYPE html>
--<html>
--<head>
-    -    <style>
-    -        body {
-        -            background-color: powderblue;
-        -        }
-    -
-    -        h1 {
-                 -            color: blue;
-                 -        }
-    -
-    -        p {
-                 -            color: red;
-                 -        }
-    -    </style>
-    -
-    -    <h1>Welcome to the Nanny App</h1>
-    -    <p><a href="http://localhost:8000/login">Login</a></p>
-    -    <p><a href="http://localhost:8000/register">Sign Up</a></p>
-    -    <p><a href="http://localhost:8000/employer_add">add employer</a></p>
-    -    <p><a href="http://localhost:8000/expense_add">add expense</a></p>
-    -    <p><a href="http://localhost:8000/showdata">show data</a></p>
-    -</head>
--</html>
+<!DOCTYPE html>
+
+{% load static %}
+
+
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/blog.css' %}" />
+<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<html>
+<head>
+
+    <div class="container">
+        <h1>Welcome to the Nanny App</h1>
+        <p><a href="http://localhost:8000/login">Login</a></p>
+        <p><a href="http://localhost:8000/register">Sign Up</a></p>
+
+    </div>
+    </head>
+</html>
