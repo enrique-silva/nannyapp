@@ -72,7 +72,7 @@ def expense_add(request):
                               additional_cost=additional_cost, shift_date=shift_date,
                               total_hours=total_hours, description=description, )
         expense_obj.save()
-        return redirect("/showdata")
+        return redirect("/home_page_user")
     else:
         form = ExpenseAddForm()
         return render(request, 'polls/form.html', {"form": form, "title": title})
